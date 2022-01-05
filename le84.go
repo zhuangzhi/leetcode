@@ -25,7 +25,7 @@ func largestRectangleArea(heights []int) int {
 				break
 			}
 			accumulatedWidth += r.Width
-			ans = max(ans, r.Height*accumulatedWidth)
+			ans = maxInt(ans, r.Height*accumulatedWidth)
 			s.Remove(e)
 			e = s.Front()
 		}
@@ -33,13 +33,6 @@ func largestRectangleArea(heights []int) int {
 		s.PushFront(Rect{accumulatedWidth + 1, height})
 	}
 	return ans
-}
-
-func max(l, r int) int {
-	if l >= r {
-		return l
-	}
-	return r
 }
 
 type Rect struct {

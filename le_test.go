@@ -1,11 +1,33 @@
 package leetcode
 
 import (
+	"fmt"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
 )
 
+func TestLe20(t *testing.T) {
+	units := []struct {
+		s      string
+		expect bool
+	}{
+		{"()", true},
+		{"()[]{}", true},
+		{"([{}])", true},
+		{"([{})]", false},
+		{"(]", false},
+		{"(", false},
+		{"((", false},
+		{")", false},
+		{"))", false},
+		{"]", false},
+		{"]]", false},
+	}
+	for _, u := range units {
+		assert.Equal(t, u.expect, isValid(u.s), fmt.Sprintf("%s expected: %v", u.s, u.expect))
+	}
+}
 func TestLe21(t *testing.T) {
 	units := []struct {
 		l1, l2 []int
@@ -73,6 +95,37 @@ func TestLe25(t *testing.T) {
 		nums := listNodesNums(out)
 		assert.Equal(t, u.expect, nums, reverseKGroup(newListNodes(u.nums), u.k))
 	}
+}
+
+func TestLe42(t *testing.T) {
+	a := assert.New(t)
+	units := []struct {
+		nums   []int
+		expect int
+	}{
+		{[]int{0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1}, 6},
+		{[]int{4, 2, 0, 3, 2, 5}, 9},
+	}
+	for _, u := range units {
+		a.Equal(u.expect, trap(u.nums))
+	}
+}
+
+func TestLe55(t *testing.T) {
+	a := assert.New(t)
+	stack := MinStackConstructor()
+	stack.Push(1)
+	a.Equal(1, stack.Top())
+	a.Equal(1, stack.GetMin())
+	stack.Push(2)
+	a.Equal(2, stack.Top())
+	a.Equal(1, stack.GetMin())
+	stack.Push(-1)
+	a.Equal(-1, stack.Top())
+	a.Equal(-1, stack.GetMin())
+	stack.Pop()
+	a.Equal(2, stack.Top())
+	a.Equal(1, stack.GetMin())
 }
 func TestLe66(t *testing.T) {
 	units := []struct {
@@ -194,6 +247,57 @@ func TestLe142(t *testing.T) {
 	}
 }
 
+func Test150(t *testing.T) {
+	// input := []int{1, 2, 3, 4, 5}
+	units := []struct {
+		tokens   []string
+		expected int
+	}{
+		{[]string{"2", "1", "+", "3", "*"}, 9},
+		{[]string{"4", "13", "5", "/", "+"}, 6},
+		{[]string{"10", "6", "9", "3", "+", "-11", "*", "/", "*", "17", "+", "5", "+"}, 22},
+	}
+
+	for _, u := range units {
+		assert.Equal(t, u.expected, evalRPN(u.tokens))
+	}
+}
+
+func Test224(t *testing.T) {
+	// input := []int{1, 2, 3, 4, 5}
+	units := []struct {
+		s        string
+		expected int
+	}{
+		{"10 + 21", 31},
+		{"2 -1 + 2", 3},
+		{"-2 + 1", -1},
+		{"(1+(4+5+2)-3)+(6+8)", 23},
+		{"(1+(4+5+2)-3)+(-6+8)", 11},
+		{"(1+(4+5+2)*3)+(6+8)", 48},
+	}
+
+	for _, u := range units {
+		assert.Equal(t, u.expected, calculateI(u.s))
+	}
+}
+
+func Test227(t *testing.T) {
+	// input := []int{1, 2, 3, 4, 5}
+	units := []struct {
+		s        string
+		expected int
+	}{
+		{"10 + 21", 31},
+		{"2 -1 + 2", 3},
+		//{"(1+(4+5+2)-3)+(6+8)", 23},
+	}
+
+	for _, u := range units {
+		assert.Equal(t, u.expected, calculateII(u.s))
+	}
+}
+
 func TestLe206(t *testing.T) {
 	// input := []int{1, 2, 3, 4, 5}
 	units := []struct {
@@ -205,6 +309,23 @@ func TestLe206(t *testing.T) {
 
 	for _, u := range units {
 		assert.Equal(t, u.expected, listNodesNums(reverseList(newListNodes(u.nums))))
+	}
+}
+
+func TestLe239(t *testing.T) {
+	units := []struct {
+		nums     []int
+		k        int
+		expected []int
+	}{
+		{[]int{1, 3, -1, -3, 5, 3, 6, 7}, 3, []int{3, 3, 5, 5, 6, 7}},
+		{[]int{1}, 1, []int{1}},
+		{[]int{1, -1}, 1, []int{1, -1}},
+		{[]int{4, 2}, 2, []int{4}},
+	}
+
+	for _, u := range units {
+		assert.Equal(t, u.expected, maxSlidingWindow(u.nums, u.k), u.nums)
 	}
 }
 
