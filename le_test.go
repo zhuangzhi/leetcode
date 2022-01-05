@@ -2,6 +2,7 @@ package leetcode
 
 import (
 	"fmt"
+	"sort"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -108,6 +109,28 @@ func TestLe42(t *testing.T) {
 	}
 	for _, u := range units {
 		a.Equal(u.expect, trap(u.nums))
+	}
+}
+
+func TestLe49(t *testing.T) {
+	a := assert.New(t)
+	units := []struct {
+		strs   []string
+		expect [][]string
+	}{
+		{[]string{"eat", "tea", "tan", "ate", "nat", "bat"}, [][]string{{"bat"}, {"nat", "tan"}, {"ate", "eat", "tea"}}},
+	}
+	for _, u := range units {
+		sortStrSlice(u.expect)
+		actual := groupAnagrams(u.strs)
+		sortStrSlice(actual)
+		a.ElementsMatch(u.expect, actual)
+	}
+}
+
+func sortStrSlice(strslices [][]string) {
+	for _, slice := range strslices {
+		sort.Strings(slice)
 	}
 }
 
@@ -344,7 +367,7 @@ func TestLe283(t *testing.T) {
 }
 func TestLe641(t *testing.T) {
 	a := assert.New(t)
-	que := Constructor(2)
+	que := DequeConstructor(2)
 	a.Equal(0, que.size)
 	que.InsertFront(1)
 	que.InsertLast(2)

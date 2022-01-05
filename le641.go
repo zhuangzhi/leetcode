@@ -12,7 +12,7 @@ type MyCircularDeque struct {
 	cap, size  int
 }
 
-func Constructor(k int) MyCircularDeque {
+func DequeConstructor(k int) MyCircularDeque {
 	head, tail := &DequeNode{val: -1}, &DequeNode{val: -1}
 	head.next = tail
 	tail.pre = head
