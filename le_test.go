@@ -8,6 +8,19 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+func TestLe1(t *testing.T) {
+	units := []struct {
+		nums   []int
+		target int
+		expect []int
+	}{
+		{[]int{2, 7, 11, 15}, 9, []int{0, 1}},
+		{[]int{3, 2, 4}, 6, []int{1, 2}},
+	}
+	for _, u := range units {
+		assert.Equal(t, u.expect, twoSum(u.nums, u.target))
+	}
+}
 func TestLe20(t *testing.T) {
 	units := []struct {
 		s      string
@@ -95,6 +108,24 @@ func TestLe25(t *testing.T) {
 		out := reverseKGroup(head, u.k)
 		nums := listNodesNums(out)
 		assert.Equal(t, u.expect, nums, reverseKGroup(newListNodes(u.nums), u.k))
+	}
+}
+
+func TestLe30(t *testing.T) {
+	a := assert.New(t)
+	units := []struct {
+		str    string
+		words  []string
+		expect []int
+	}{
+		{"wordgoodgoodgoodbestword", []string{"word", "good", "best", "good"}, []int{8}},
+		{"barfoothefoobarman", []string{"foo", "bar"}, []int{0, 9}},
+		{"a", []string{"a", "a"}, []int{}},
+		{"wordgoodgoodgoodbestword", []string{"word", "good", "best", "word"}, []int{}},
+		{"barfoofoobarthefoobarman", []string{"foo", "bar", "the"}, []int{6, 9, 12}},
+	}
+	for _, u := range units {
+		a.ElementsMatch(u.expect, findSubstring(u.str, u.words))
 	}
 }
 
@@ -376,4 +407,20 @@ func TestLe641(t *testing.T) {
 	que.DeleteFront()
 	a.Equal(1, que.size)
 	a.Equal(2, que.GetFront())
+}
+
+func TestLe874(t *testing.T) {
+	units := []struct {
+		commands  []int
+		obstacles [][]int
+		expected  int
+	}{
+		{[]int{4, -1, 3}, [][]int{}, 25},
+		{[]int{6, -1, -1, 6}, [][]int{}, 36},
+		{[]int{4, -1, 4, -2, 4}, [][]int{{2, 4}}, 65},
+	}
+
+	for _, u := range units {
+		assert.Equal(t, u.expected, robotSim(u.commands, u.obstacles))
+	}
 }

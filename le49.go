@@ -4,7 +4,9 @@ import "sort"
 
 // https://leetcode-cn.com/problems/group-anagrams/
 // 49. 字母异位词分组
-
+// hash string 方法：
+// 1. sort string
+// 2. 用[26]int{} 记录每个字母出现次数
 func groupAnagrams(strs []string) [][]string {
 	hash := map[string][]string{}
 	for _, str := range strs {
