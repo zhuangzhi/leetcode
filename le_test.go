@@ -19,8 +19,53 @@ func TestLe1(t *testing.T) {
 	}
 	for _, u := range units {
 		assert.Equal(t, u.expect, twoSum(u.nums, u.target))
+		assert.Equal(t, u.expect, twoSum2(u.nums, u.target))
 	}
 }
+
+func TestLe167(t *testing.T) {
+	units := []struct {
+		nums   []int
+		target int
+		expect []int
+	}{
+		{[]int{2, 7, 11, 15}, 9, []int{1, 2}},
+		{[]int{2, 3, 4}, 6, []int{1, 3}},
+	}
+	for _, u := range units {
+		assert.Equal(t, u.expect, twoSumII(u.nums, u.target))
+	}
+}
+
+func TestLe15(t *testing.T) {
+	units := []struct {
+		nums   []int
+		expect [][]int
+	}{
+		{[]int{-1, 0, 1, 2, -1, -4}, [][]int{{-1, -1, 2}, {-1, 0, 1}}},
+		{[]int{0, 0}, [][]int{}},
+		{[]int{}, [][]int{}},
+	}
+	for _, u := range units {
+		assert.Equal(t, u.expect, threeSum(u.nums))
+	}
+}
+
+func TestLe11(t *testing.T) {
+	units := []struct {
+		nums   []int
+		expect int
+	}{
+		{[]int{1, 8, 6, 2, 5, 4, 8, 3, 7}, 49},
+		{[]int{1, 1}, 1},
+		{[]int{4, 3, 2, 1, 4}, 16},
+		{[]int{1, 2, 1}, 2},
+	}
+	for _, u := range units {
+		assert.Equal(t, u.expect, maxArea(u.nums))
+	}
+}
+
 func TestLe20(t *testing.T) {
 	units := []struct {
 		s      string
@@ -396,6 +441,66 @@ func TestLe283(t *testing.T) {
 		assert.Equal(t, u.expected, u.nums)
 	}
 }
+
+func TestLe304(t *testing.T) {
+	units := []struct {
+		matrix [][]int
+		regins []struct {
+			region   []int
+			expected int
+		}
+	}{
+		{
+			[][]int{
+				{3, 0, 1, 4, 2},
+				{5, 6, 3, 2, 1},
+				{1, 2, 0, 1, 5},
+				{4, 1, 0, 1, 7},
+				{1, 0, 3, 0, 5},
+			},
+			[]struct {
+				region   []int
+				expected int
+			}{
+				{
+					[]int{2, 1, 4, 3},
+					8,
+				},
+				{
+					[]int{1, 1, 2, 2},
+					11,
+				},
+				{
+					[]int{1, 2, 2, 4},
+					12,
+				},
+			},
+		},
+	}
+
+	for _, u := range units {
+		numMatrix := Constructor(u.matrix)
+		for _, c := range u.regins {
+			r := c.region
+			assert.Equal(t, c.expected, numMatrix.SumRegion(r[0], r[1], r[2], r[3]))
+		}
+	}
+}
+
+func TestLe560(t *testing.T) {
+	units := []struct {
+		nums     []int
+		k        int
+		expected int
+	}{
+		{[]int{1, 1, 1}, 2, 2},
+		{[]int{-1, -1, 1}, 0, 1},
+	}
+
+	for _, u := range units {
+		assert.Equal(t, u.expected, subarraySum(u.nums, u.k))
+	}
+}
 func TestLe641(t *testing.T) {
 	a := assert.New(t)
 	que := DequeConstructor(2)
@@ -407,6 +512,38 @@ func TestLe641(t *testing.T) {
 	que.DeleteFront()
 	a.Equal(1, que.size)
 	a.Equal(2, que.GetFront())
+}
+
+func TestLe697(t *testing.T) {
+	units := []struct {
+		nums     []int
+		expected int
+	}{
+		{[]int{1, 2, 2, 3, 1}, 2},
+		{[]int{1, 2, 2, 3, 1, 4, 2}, 6},
+	}
+
+	for _, u := range units {
+		assert.Equal(t, u.expected, findShortestSubArray(u.nums))
+	}
+}
+
+func TestLe811(t *testing.T) {
+	units := []struct {
+		cpdomains []string
+		expected  []string
+	}{
+		{[]string{"9001 discuss.leetcode.com"}, []string{"9001 leetcode.com", "9001 discuss.leetcode.com", "9001 com"}},
+		{
+			[]string{"900 google.mail.com", "50 yahoo.com", "1 intel.mail.com", "5 wiki.org"},
+			[]string{"901 mail.com", "50 yahoo.com", "900 google.mail.com", "5 wiki.org", "5 org", "1 intel.mail.com", "951 com"},
+		},
+		{[]string{}, []string{}},
+	}
+
+	for _, u := range units {
+		assert.ElementsMatch(t, u.expected, subdomainVisits(u.cpdomains))
+	}
 }
 
 func TestLe874(t *testing.T) {
@@ -422,5 +559,71 @@ func TestLe874(t *testing.T) {
 
 	for _, u := range units {
 		assert.Equal(t, u.expected, robotSim(u.commands, u.obstacles))
+	}
+}
+
+func TestLe1074(t *testing.T) {
+	units := []struct {
+		nums     [][]int
+		target   int
+		expected int
+	}{
+		{[][]int{
+			{0, 1, 0},
+			{1, 1, 1},
+			{0, 1, 0},
+		}, 0, 4},
+		{[][]int{
+			{1, -1},
+			{-1, 1},
+		}, 0, 5},
+	}
+
+	for _, u := range units {
+		assert.Equal(t, u.expected, numSubmatrixSumTarget(u.nums, u.target))
+	}
+}
+
+func TestLe1109(t *testing.T) {
+	units := []struct {
+		nums     [][]int
+		n        int
+		expected []int
+	}{
+		{
+			[][]int{
+				{1, 2, 10},
+				{2, 3, 20},
+				{2, 5, 25},
+			},
+			5, []int{10, 55, 45, 25, 25},
+		},
+		{
+			[][]int{
+				{1, 2, 10},
+				{2, 2, 15},
+			},
+			2, []int{10, 25},
+		},
+	}
+
+	for _, u := range units {
+		assert.Equal(t, u.expected, corpFlightBookings(u.nums, u.n))
+	}
+}
+
+// 1248
+func TestLe1248(t *testing.T) {
+	units := []struct {
+		nums     []int
+		k        int
+		expected int
+	}{
+		{[]int{1, 1, 2, 1, 1}, 3, 2},
+		{[]int{2, 2, 2, 1, 2, 2, 1, 2, 2, 2}, 2, 16},
+	}
+
+	for _, u := range units {
+		assert.Equal(t, u.expected, numberOfSubarrays(u.nums, u.k))
 	}
 }

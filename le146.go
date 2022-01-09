@@ -20,7 +20,7 @@ type LRUCacheNode struct {
 	pre, next *LRUCacheNode
 }
 
-func Constructor(capacity int) LRUCache {
+func LRUConstructor(capacity int) LRUCache {
 	cache := LRUCache{cap: capacity, size: 0}
 	cache.head = &LRUCacheNode{}
 	cache.tail = &LRUCacheNode{}
