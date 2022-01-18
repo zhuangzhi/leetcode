@@ -1,7 +1,6 @@
 package week3
 
 import (
-	"fmt"
 	"testing"
 
 	. "github.com/zhuangzhi/leetcode/util"
@@ -86,8 +85,6 @@ func TestLe47(t *testing.T) {
 
 	for _, u := range units {
 		actual := permuteUnique(u.nums)
-		fmt.Println(actual)
-		fmt.Println(u.expected)
 		assert.ElementsMatch(t, u.expected, actual)
 	}
 }
@@ -112,8 +109,6 @@ func TestLe77(t *testing.T) {
 		actual := combine(u.n, u.k)
 		SortIntSlice(u.expected)
 		SortIntSlice(actual)
-		fmt.Println(u.expected)
-		fmt.Println(actual)
 		assert.ElementsMatch(t, u.expected, actual)
 	}
 }

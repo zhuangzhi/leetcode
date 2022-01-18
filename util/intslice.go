@@ -58,6 +58,9 @@ func (is Ints) Append(vals ...int) Ints {
 func (is Ints) RemoveEnd(n int) Ints {
 	return is[:is.Len()-n]
 }
+func (is Ints) Pop() Ints {
+	return is[:is.Len()-1]
+}
 
 func (is Ints) Sort() Ints {
 	sort.Ints(is)

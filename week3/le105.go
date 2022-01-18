@@ -7,6 +7,7 @@ import (
 func buildTree(preorder []int, inorder []int) *TreeNode {
 	return build(preorder, inorder)
 }
+
 func build(preorder, inorder []int) *TreeNode {
 	if len(preorder) == 0 || len(inorder) == 0 {
 		return nil

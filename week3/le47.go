@@ -6,6 +6,8 @@ import (
 	. "github.com/zhuangzhi/leetcode/util"
 )
 
+// permutation
+
 func permuteUnique(nums []int) (ans [][]int) {
 	n := len(nums)
 	sort.Ints(nums)
@@ -18,14 +20,20 @@ func permuteUnique(nums []int) (ans [][]int) {
 			return
 		}
 		for i, v := range nums {
-			if vis[i] || i > 0 && !vis[i-1] && v == nums[i-1] {
+			if vis[i] || (i > 0 && !vis[i-1] && v == nums[i-1]) {
 				continue
 			}
+			perm = perm.Append(nums[i])
+			vis[i] = true
+			backtrack(idx + 1)
+			vis[i] = false
+			perm = perm.Pop()
 		}
-		backtrack(idx)
 	}
-	return backtrackUnique(n, 0, make([][]int, 0, n*n), nums)
 
+	backtrack(0)
+
+	return
 }
 
 func backtrackUnique(n, first int, ans [][]int, res Ints) [][]int {
