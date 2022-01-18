@@ -145,3 +145,19 @@ func TestLe105(t *testing.T) {
 		// assert.ElementsMatch(t, u.expected, actual)
 	}
 }
+
+func TestLe685(t *testing.T) {
+	units := []struct {
+		edgs     [][]int
+		expected []int
+	}{
+		{[][]int{{1, 2}, {1, 3}, {2, 3}}, []int{2, 3}},
+		{[][]int{{1, 2}, {2, 3}, {3, 4}, {4, 1}, {1, 5}}, []int{4, 1}},
+		{[][]int{{2, 1}, {3, 1}, {4, 2}, {1, 4}}, []int{2, 1}},
+	}
+
+	for _, u := range units {
+		actual := findRedundantDirectedConnection(u.edgs)
+		assert.Equal(t, u.expected, actual)
+	}
+}
