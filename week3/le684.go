@@ -2,13 +2,13 @@ package week3
 
 import . "github.com/zhuangzhi/leetcode/util"
 
-func MaxEdgeNumber(edges [][]int) int {
-	n := 0
+func MaxEdgeNumber(edges [][]int) (n int) {
+	n = 0
 	for _, edge := range edges {
 		x, y := edge[0], edge[1]
 		n = MaxInt(n, MaxInt(x, y))
 	}
-	return n
+	return
 }
 
 func BuildUndirectedSideVector(maxEdge int, edges [][]int) (to [][]int) {
