@@ -103,11 +103,11 @@ func TestLe21(t *testing.T) {
 		{[]int{}, []int{}, []int{}},
 	}
 	for _, u := range units {
-		l1 := ListNodesFromNums(u.l1)
-		l2 := ListNodesFromNums(u.l2)
+		l1 := BuildListNodes(u.l1)
+		l2 := BuildListNodes(u.l2)
 		head := mergeTwoLists(l1, l2)
 
-		assert.Equal(t, u.Expect, NumsFromListNodes(head))
+		assert.Equal(t, u.Expect, StoreListNodes(head))
 	}
 }
 
@@ -137,10 +137,10 @@ func TestLe25(t *testing.T) {
 		{[]int{1, 2, 3, 4, 5}, 1, []int{1, 2, 3, 4, 5}},
 	}
 	for _, u := range units {
-		head := ListNodesFromNums(u.nums)
+		head := BuildListNodes(u.nums)
 		out := reverseKGroup(head, u.k)
-		nums := NumsFromListNodes(out)
-		assert.Equal(t, u.expect, nums, reverseKGroup(ListNodesFromNums(u.nums), u.k))
+		nums := StoreListNodes(out)
+		assert.Equal(t, u.expect, nums, reverseKGroup(BuildListNodes(u.nums), u.k))
 	}
 }
 
@@ -285,7 +285,7 @@ func TestLe88(t *testing.T) {
 }
 
 func buildCycle(nums []int, pos int) *ListNode {
-	head := ListNodesFromNums(nums)
+	head := BuildListNodes(nums)
 	tail := head
 	var node *ListNode
 	for tail.Next != nil {
@@ -395,7 +395,7 @@ func TestLe206(t *testing.T) {
 	}
 
 	for _, u := range units {
-		assert.Equal(t, u.expected, NumsFromListNodes(reverseList(ListNodesFromNums(u.nums))))
+		assert.Equal(t, u.expected, StoreListNodes(reverseList(BuildListNodes(u.nums))))
 	}
 }
 
