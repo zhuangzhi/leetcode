@@ -1,7 +1,5 @@
 package week6
 
-import "fmt"
-
 // https://leetcode-cn.com/problems/longest-increasing-subsequence/
 // 300. 最长递增子序列
 func lengthOfLIS(nums []int) int {
@@ -17,8 +15,6 @@ func lengthOfLIS(nums []int) int {
 			}
 		}
 	}
-	fmt.Println(nums)
-	fmt.Println(dp)
 	max, _ := maxInts(dp)
 	return max
 }
