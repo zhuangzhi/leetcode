@@ -6,6 +6,13 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+func TestMaxMin(t *testing.T) {
+	assert.Equal(t, 3, maxInt(1, 2, 3))
+	assert.Equal(t, 3, maxInt(3, 2, 1, 0))
+	assert.Equal(t, 0, minInt(3, 2, 1, 0))
+	assert.Equal(t, 1, minInt(1, 2, 3))
+}
+
 func TestLe300(t *testing.T) {
 	units := []struct {
 		s        []int

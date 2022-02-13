@@ -61,9 +61,12 @@ for i := 1; i <= amount; i++ {
     }
 }
 ```
+
 标准题解：
 设opt[i]表示凑成金额i所需的最小硬币数
 状态转移方程：  opt[i] = min(coin->coins){opt[i-coin]}
 边界：opt[0] = 0, opt[i] = +INF (i>0)
 目标：opt[amount]
 时间复杂度：O(amount*coins)
+
+如果还需要方案（硬币）情况：记录转移路径，打印结果。

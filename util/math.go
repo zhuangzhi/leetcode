@@ -1,17 +1,29 @@
 package util
 
-func MaxInt(l, r int) int {
-	if l >= r {
-		return l
+func MaxInt(s ...int) int {
+	if len(s) == 0 {
+		return int(-1e9)
 	}
-	return r
+	max := s[0]
+	for _, v := range s {
+		if max < v {
+			max = v
+		}
+	}
+	return max
 }
 
-func MinInt(l, r int) int {
-	if l <= r {
-		return l
+func MinInt(s ...int) int {
+	if len(s) == 0 {
+		return int(1e9)
 	}
-	return r
+	min := s[0]
+	for _, v := range s {
+		if min > v {
+			min = v
+		}
+	}
+	return min
 }
 
 func EqualsMap(left, right map[string]int) bool {

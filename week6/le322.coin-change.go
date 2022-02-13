@@ -21,9 +21,15 @@ func coinChange(coins []int, amount int) int {
 	return opt[amount]
 }
 
-func minInt(i, j int) int {
-	if i < j {
-		return i
+func minInt(s ...int) int {
+	if len(s) == 0 {
+		return int(1e9)
 	}
-	return j
+	min := s[0]
+	for _, v := range s {
+		if min > v {
+			min = v
+		}
+	}
+	return min
 }

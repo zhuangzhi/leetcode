@@ -31,9 +31,15 @@ func minimumEffort(tasks [][]int) int {
 	return ans
 }
 
-func maxInt(l, r int) int {
-	if l >= r {
-		return l
+func maxInt(s ...int) int {
+	if len(s) == 0 {
+		return int(-1e9)
 	}
-	return r
+	max := s[0]
+	for _, v := range s {
+		if max < v {
+			max = v
+		}
+	}
+	return max
 }
