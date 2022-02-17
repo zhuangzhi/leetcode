@@ -33,3 +33,16 @@ func minInt(s ...int) int {
 	}
 	return min
 }
+
+func maxInt(s ...int) int {
+	if len(s) == 0 {
+		return int(-1e9)
+	}
+	max := s[0]
+	for _, v := range s {
+		if max < v {
+			max = v
+		}
+	}
+	return max
+}
